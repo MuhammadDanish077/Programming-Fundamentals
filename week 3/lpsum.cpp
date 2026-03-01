@@ -4,10 +4,10 @@ using namespace std;
 main(){
 
 cout<<"Enter sides: ";
-int sides;
-cin>>sides;
+int s;
+cin>>s;
 int sum;
-sum=(sides-2)*180;
-cout<<"Sum of angles = "<<sum;
+sum=(s-2)*180;
+cout<<"Sum of angles "<<sum;
 
 }
