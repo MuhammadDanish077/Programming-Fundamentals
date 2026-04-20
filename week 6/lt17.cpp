@@ -13,11 +13,11 @@ for(int i=0; i<a.length();i++){
     {
 if(a[i]==vowels[x]){
  isVowel=true;
- break;
+ 
 }}
 
 if(!isVowel){
-    result += a[i];
+    result = result + a[i];
 }}
 cout<<"String with vowels removed: " << result << endl;
 
