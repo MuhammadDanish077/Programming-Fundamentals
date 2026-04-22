@@ -26,7 +26,7 @@ main()
 
         cout << "User Menu" << endl;
         cout << "1. Admin" << endl;
-        cout << "2. Add New Medicine (Staff)" << endl;
+        cout << "2. Generate Customer bill (Staff)" << endl;
         cout << "3. Exit" << endl;
         cout << "Choose option : ";
         int userOption;
@@ -62,7 +62,7 @@ main()
                         cout << "3. Update Medicine Record" << endl;
                         cout << "4. Delete Medicine Record" << endl;
                         cout << "5. Generate Stock Report" << endl;
-                        cout << "6. Generate Customer Bill" << endl;
+                        cout << "6. Add New Medicine" << endl;
                         cout << "7. Check Low Stock Alerts" << endl;
                         cout << "8. Check Expired Medicines" << endl;
                         cout << "9. Calculate Total Inventory Value" << endl;
@@ -146,22 +146,22 @@ main()
                             if (found)
                             {
                                 cout << "===== Old Record =====" << endl;
-                                cout << "Name: " << nameArray[foundIndex] << " | Company: " << companyArray[foundIndex] << " | Category: " << categoryArray[foundIndex] << " | Qty: " << quantityArray[foundIndex] << " | Price: " << priceArray[foundIndex] << " | Expiry: " << expMonthArray[foundIndex] << "/" << expYearArray[foundIndex] << endl;
+                                cout << "Name: " << nameArray[foundIndex] << " | Company: " << companyArray[foundIndex] << " | Category: " << categoryArray[foundIndex]<<endl << "Quantity: " << quantityArray[foundIndex] << " | Price: " << priceArray[foundIndex] << " | Expiry: " << expMonthArray[foundIndex] << "/" << expYearArray[foundIndex] << endl;
 
                                 cout << "\nEnter new details:" << endl;
                                 cout << "Medicine Name : ";
                                 cin >> nameArray[foundIndex];
-                                cout << "Company       : ";
+                                cout << "Company : ";
                                 cin >> companyArray[foundIndex];
-                                cout << "Category      : ";
+                                cout << "Category : ";
                                 cin >> categoryArray[foundIndex];
-                                cout << "Quantity      : ";
+                                cout << "Quantity : ";
                                 cin >> quantityArray[foundIndex];
-                                cout << "Price (Rs.)   : ";
+                                cout << "Price (Rs.) : ";
                                 cin >> priceArray[foundIndex];
-                                cout << "Expiry Month: ";
+                                cout << "Expiry Month : ";
                                 cin >> expMonthArray[foundIndex];
-                                cout << "Expiry Year: ";
+                                cout << "Expiry Year : ";
                                 cin >> expYearArray[foundIndex];
 
                                 cout << "Record updated successfully!" << endl;
@@ -228,72 +228,32 @@ main()
                             cout << "Total Stock Value    : Rs. " << totalValue << endl;
                         }
 
-                        // OPTION 6: Generate Customer Bill
+                        // OPTION 6: Add new medicine
                         else if (adminOption == 6)
                         {
                             system("cls");
-                            cout << "============ Customer Bill ============" << endl;
-                            cout << "Enter customer name : ";
-                            string customerName;
-                            cin >> customerName;
+                            cout << "========= Add New Medicine =========" << endl;
+                            cout << "Enter Medicine Name: ";
+                            cin >> nameArray[index];
+                            cout << "Enter Company: ";
+                            cin >> companyArray[index];
+                            cout << "Enter Category: ";
+                            cin >> categoryArray[index];
+                            cout << "Enter Quantity: ";
+                            cin >> quantityArray[index];
+                            cout << "Enter Price (Rs.) : ";
+                            cin >> priceArray[index];
+                            cout << "Enter Expiry Month : ";
+                            cin >> expMonthArray[index];
+                            cout << "Enter Expiry Year : ";
+                            cin >> expYearArray[index];
 
-                            float grandTotal = 0;
-                            char addMore = 'y';
-
-                            while (addMore == 'y' || addMore == 'Y')
-                            {
-                                cout << "Enter medicine name : ";
-                                string medName;
-                                cin >> medName;
-
-                                bool found = false;
-                                int foundIndex = -1;
-                                for (int j = 0; j < index; j++)
-                                {
-                                    if (nameArray[j] == medName)
-                                    {
-                                        foundIndex = j;
-                                        found = true;
-                                    }
-                                }
-
-                                if (!found)
-                                {
-                                    cout << "Medicine not found in system." << endl;
-                                }
-                                else
-                                {
-                                    cout << "Enter quantity : ";
-                                    int qty;
-                                    cin >> qty;
-
-                                    if (qty > quantityArray[foundIndex])
-                                    {
-                                        cout << "Insufficient stock! Available: " << quantityArray[foundIndex] << endl;
-                                    }
-                                    else
-                                    {
-                                        float subtotal = qty * priceArray[foundIndex];
-                                        grandTotal += subtotal;
-                                        // reduce stock
-                                        quantityArray[foundIndex] -= qty;
-                                        cout << "   --- Items Purchased ---" << endl;
-                                        cout << "Medicine\tQty\tPrice\tSubtotal" << endl;
-                                        cout << medName << "\t" << qty << "\t" << priceArray[foundIndex] << "\t" << subtotal << endl;
-                                    }
-                                }
-
-                                cout << "Add more medicine? (y/n) : ";
-                                cin >> addMore;
-                            }
-                            cout << endl;
-
-                            cout << "Customer      : " << customerName << endl;
-                            cout << "Grand Total   : Rs. " << grandTotal << endl;
-                            cout << "Thank you for your purchase!" << endl;
+                            index++;
+                            cout << "\nMedicine record saved successfully!" << endl;
+                            getch();
                         }
 
-                        // --- OPTION 7: Check Low Stock Alerts ---
+                        //  Check Low Stock Alerts
                         else if (adminOption == 7)
                         {
                             system("cls");
@@ -361,7 +321,7 @@ main()
                             cout << "TOTAL INVENTORY VALUE : Rs. " << totalValue << endl;
                         }
 
-                        // --- OPTION 10: Logout ---
+                        //  Logout
                         else if (adminOption == 10)
                         {
                             cout << "Logging out..." << endl;
@@ -389,28 +349,69 @@ main()
             }
         }
 
-        //           STAFF: ADD MEDICINE
+        //        for staff : Generate Customer Bill
         else if (userOption == 2)
         {
             system("cls");
-            cout << "========= Add New Medicine =========" << endl;
-            cout << "Enter Medicine Name: ";
-            cin >> nameArray[index];
-            cout << "Enter Company: ";
-            cin >> companyArray[index];
-            cout << "Enter Category: ";
-            cin >> categoryArray[index];
-            cout << "Enter Quantity: ";
-            cin >> quantityArray[index];
-            cout << "Enter Price (Rs.) : ";
-            cin >> priceArray[index];
-            cout << "Enter Expiry Month : ";
-            cin >> expMonthArray[index];
-            cout << "Enter Expiry Year : ";
-            cin >> expYearArray[index];
+            cout << "============ Customer Bill ============" << endl;
+            cout << "Enter customer name : ";
+            string customerName;
+            cin >> customerName;
 
-            index++;
-            cout << "\nMedicine record saved successfully!" << endl;
+            float grandTotal = 0;
+            char addMore = 'y';
+
+            while (addMore == 'y' || addMore == 'Y')
+            {
+                cout << "Enter medicine name : ";
+                string medName;
+                cin >> medName;
+
+                bool found = false;
+                int foundIndex = -1;
+                for (int j = 0; j < index; j++)
+                {
+                    if (nameArray[j] == medName)
+                    {
+                        foundIndex = j;
+                        found = true;
+                    }
+                }
+
+                if (!found)
+                {
+                    cout << "Medicine not found in system." << endl;
+                }
+                else
+                {
+                    cout << "Enter quantity : ";
+                    int qty;
+                    cin >> qty;
+
+                    if (qty > quantityArray[foundIndex])
+                    {
+                        cout << "Insufficient stock! Available: " << quantityArray[foundIndex] << endl;
+                    }
+                    else
+                    {
+                        float subtotal = qty * priceArray[foundIndex];
+                        grandTotal += subtotal;
+                        // reduce stock
+                        quantityArray[foundIndex] -= qty;
+                        cout << "   --- Items Purchased ---" << endl;
+                        cout << "Medicine\tQty\tPrice\tSubtotal" << endl;
+                        cout << medName << "\t\t " << qty << "\t " << priceArray[foundIndex] << "\t" << subtotal << endl;
+                    }
+                }
+
+                cout << "Add more medicine? (y/n) : ";
+                cin >> addMore;
+            }
+            cout << endl;
+
+            cout << "Customer      : " << customerName << endl;
+            cout << "Grand Total   : Rs. " << grandTotal << endl;
+            cout << "Thank you for your purchase!" << endl;
             getch();
         }
 
